@@ -1,11 +1,8 @@
-# PSUB-CSPC-Helios-One
+# Helios-One
 
-A Group Project for the Subject of "Introduction to Computing" to create a Website based on a proposal during the 1st Semester.
-
-CONCEPT:
-An Inventory with a similar concept to Electronic Marketplaces, Electronic Shops, and Electronic Auctions.
+This is a refactor of a previous group project from 1st Year of Computer Science. The web application aims to provide an inventory of all Flora for people to see.
 
 Programming Languages to be used:
  - HTML
  - CSS
- - Javascript (if needed)
+ - Javascript
