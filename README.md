@@ -2,7 +2,8 @@
 
 This is a refactor of a previous group project from 1st Year of Computer Science. The web application aims to provide an inventory of all Flora for people to see.
 
-Programming Languages to be used:
- - HTML
+This refactor will utilize the following:
+ - Python (Backend, Flask)
+ - HTML (Frontend)
  - CSS
  - Javascript
