@@ -33,7 +33,7 @@ hr {
 
 .card:hover {
     border: 2px solid forestgreen;
-    box-shadow: 4px 4px black;
+    box-shadow: 4px 3px rgb(46, 46, 46);
     transition: .3s;
 }
 
