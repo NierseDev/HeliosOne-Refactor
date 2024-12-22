@@ -38,16 +38,30 @@ auth = firebase.auth()
 
 # App Routes
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 def index():
-    connect = connectDB()
-    cursor = connect.cursor(dictionary=True)
-    cursor.execute("SELECT FlowerName, FlowerBotanical, FlowerDescription, NativeRegion, FlowerHeight, imageURL FROM flowers")
-    flowers = cursor.fetchall()
-    cursor.close()
-    connect.close()
+    if request.method == 'GET':
+        connect = connectDB()
+        cursor = connect.cursor(dictionary=True)
+        cursor.execute("SELECT FlowerName, FlowerBotanical, FlowerDescription, NativeRegion, FlowerHeight, imageURL FROM flowers")
+        flowers = cursor.fetchall()
+        cursor.close()
+        connect.close()
 
-    return render_template('index.html', flowers=flowers)
+        return render_template('index.html', flowers=flowers)
+    elif request.method == 'POST':
+        query = request.form.get('Search')
+
+        connect = connectDB()
+        cursor = connect.cursor(dictionary=True)
+        cursor.execute("SELECT FlowerName FROM flowers WHERE FlowerName LIKE %s", (query))
+        flowers = cursor.fetchall()
+        cursor.close()
+        connect.close()
+        
+        if not results:
+            results = [{'FlowerName': 'No Results Found'}]
+        return render_template('index.html', flowers=flowers)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -75,13 +89,15 @@ def register():
 
         try:
             auth.create_user_with_email_and_password(email, password)
-            message = "User registered successfully!"
-            color = '#70fa70'
+
+            redirect(url_for('login'))
         except(Exception):
             message = "Error: Failed to Register User!"
             color = '#a81b1b'
+
+            return render_template('registration.html', message=message, color=color)
         
-    return render_template('registration.html', message=message, color=color)
+    
 
 # ---------------------------------------------------------------------------------------------- #
 
