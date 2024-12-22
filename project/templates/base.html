@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+    {% block bootstrap %}{% endblock %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=.5">
+    <link rel="icon" href="https://files.catbox.moe/rdvmlk.png" type="image/x-icon">
+    {% block css %}<link rel="stylesheet" href="/static/CSS/main.css">{% endblock %}
+    <link rel="stylesheet" href="/static/JS/modal.js">
+
+    <title>Helios One {% block titleExtension %}{% endblock %}</title>
+</head>
+
+<body>
+    <nav class="navbar border-bottom border-dark position-sticky" style="background-color: #ff9100;">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="margin-left: 20px;">
+                <img src="https://files.catbox.moe/k0paz3.png" alt="Helios One" style="width: 55px; height: 55px">
+            </a>
+            <form class="d-flex" style="margin:auto" role="search" action="submit" method="POST">
+                <input class="form-control border-end-0 rounded-start-pill rounded-end-0" style="border-width: 3.5px; border-color: #73913f; width: 25rem; height: 2.8rem;" type="search" placeholder="Search">
+                <button class="btn btn-light border-start-0 rounded-end-pill rounded-start-0" style="border-width: 3.5px; border-color: #73913f;" type="submit">
+                    <img src="https://files.catbox.moe/thumbs/t_8mq0vu.png" alt="Search" style="width: 20px; height: 20px">
+                </button>
+            </form>
+            <button href="{{url_for('login')}}" class="btn btn-light rounded-pill" style="padding: 2px; font-size: 30px; border-width: 3.5px; border-color: #73913f; width: 10rem; height: 2.8rem;">
+                <h3>Login</h3>
+            </button>
+        </div>
+    </nav>
+
+    {% block body %}{% endblock %}
+</body>
+
+<footer>
+    <!-- <div class="faqs">
+        <h4>About Us!</h2>
+        <p>FAQs</p>
+        <ul>
+            <li>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum mollitia illum tempora ipsam tempore sequi quo eos, officia dolorem impedit? Culpa tempora rem dolore! Fugit accusamus eveniet corrupti deleniti numquam.
+                Dignissimos provident architecto, nam unde sunt eos earum, cupiditate corrupti consequatur quia ex ut assumenda quaerat distinctio quasi consectetur veniam velit accusantium nihil numquam illo iste porro sed soluta. Ex.
+            </li>
+            <li>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non impedit dolore, fuga magnam nesciunt illum quia doloribus veniam? Hic unde corrupti possimus reprehenderit doloremque ab tenetur inventore. Repellat, maxime aspernatur?
+                Natus perspiciatis vitae animi hic, eligendi consectetur. Maxime excepturi ullam iste, aliquam nostrum consectetur perferendis, voluptatum dolorum, aspernatur quasi odio! Fugiat architecto consectetur culpa sequi eius perferendis nulla blanditiis earum!
+                Eveniet placeat voluptas voluptatibus, autem cumque quibusdam? Culpa facere consequatur odio quae officiis obcaecati, nam laudantium laborum, quas commodi, vero unde. Autem ea illo quis accusamus blanditiis laboriosam incidunt vel.
+            </li>
+        </ul>
+    </div> -->
+    
+    <!-- <br>
+
+    <div class="trade-copymark">
+        &copy;Helios One&trade;         
+    </div> -->
+</footer>
+</html>
