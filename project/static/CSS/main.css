@@ -20,17 +20,17 @@ hr {
     overflow: hidden;
 }
 
-.Header > img {
+.Header>img {
     position: relative;
     left: 21px;
     top: 4px;
 }
 
-.loginpage > a > img {
+.loginpage>a>img {
     position: absolute;
     right: 21px;
     top: 13px;
-    width: 60px; 
+    width: 60px;
     height: 60px;
     background: white;
     border-radius: 50%;
@@ -38,7 +38,7 @@ hr {
     transition: .3s;
 }
 
-.loginpage > a > img:hover {
+.loginpage>a>img:hover {
     border: 4px solid darkolivegreen;
     box-shadow: 4px 3.5px black;
     transition: .3s;
@@ -93,7 +93,7 @@ hr {
     transition: .3s;
 }
 
-.searchbar > button > img {
+.searchbar>button>img {
     content: center;
 }
 
@@ -124,7 +124,7 @@ hr {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-  }
+}
 
 .close {
     color: #aaa;
@@ -133,10 +133,11 @@ hr {
     font-weight: bold;
 }
 
-.close:hover, .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* Container Section */
