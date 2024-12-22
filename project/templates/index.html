@@ -18,9 +18,20 @@
                 <img src="https://files.catbox.moe/thumbs/t_8mq0vu.png" alt="Search" style="width: 20px; height: 20px">
             </button>
         </form>
-        <button href="{{url_for('login')}}" class="btn btn-light rounded-pill" style="padding: 2px; font-size: 30px; border-width: 3.5px; border-color: #73913f; width: 10rem; height: 2.8rem;">
-            <h3>Login</h3>
-        </button>
+        {% if 'user' in session %}
+        <a href="{{url_for('logout')}}">
+            <button class="btn btn-danger rounded-pill" style="padding: 2px; font-size: 30px; border-width: 3.5px; border-color: #73913f; width: 10rem; height: 2.8rem;">
+                <h3>Logout</h3>
+            </button>
+        </a>
+        {% endif %}
+        {% if 'user' not in session %}
+        <a href="{{url_for('login')}}">
+            <button class="btn btn-light rounded-pill" style="padding: 2px; font-size: 30px; border-width: 3.5px; border-color: #73913f; width: 10rem; height: 2.8rem;">
+                <h3>Login</h3>
+            </button>
+        </a>
+        {% endif %}
     </div>
 </nav>
 

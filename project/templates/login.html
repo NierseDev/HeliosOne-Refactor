@@ -9,19 +9,23 @@
     <h1>Sign In to Helios</h1>
     <form method="post">
         <div class="txtfield">
-            <input type="text" required>
+            <input type="email" id="Email" name="Email" required autocomplete="off">
             <span></span>
             <label>Email</label>
         </div>
         <div class="txtfield">
-            <input type="password" required>
+            <input type="password" id="Password" name="Password" required autocomplete="off">
             <span></span>
             <label>Password</label>
         </div>
-        <div class="pass">Forgot Password?</div>
+        <a href="{{url_for('register')}}">
+            <p class="pass">Not yet signed-up?</p>
+        </a>
+            
         <br>
-        <input type="submit" value="Login">
+        <button type="submit" id="submit">Login</button>
         <br><br><br>
+        {% if message %}<h5 class="text-center p-2"><mark style="background-color: {{ color }};">{{ message }}</mark></h5>{% endif %}
     </form>
 </div>
 {% endblock %}

@@ -1,12 +1,21 @@
 import secrets
-import requests
 import pyrebase
+import mysql.connector
 from flask import Flask, render_template, redirect, url_for, request, session
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
 
 # ---------------------------------------------------------------------------------------------- #
+
+def connectDB():
+    db = mysql.connector.connect(
+        host='localhost',
+        user="root",
+        database='heliosone-flowerbase'
+    )
+
+    return db
 
 def firebaseConfig():
     config = {
@@ -31,24 +40,54 @@ auth = firebase.auth()
 @app.route('/')
 @app.route('/index')
 def index():
-    url = "https://garden-api.p.rapidapi.com/plants"
-    headers = {
-	    "x-rapidapi-key": "a26d44477amshb6aaab5d2a7e338p193edejsn131e2aa2b543",
-	    "x-rapidapi-host": "garden-api.p.rapidapi.com"
-    }
-    querystring = {"plants":"plant"}
-    response = requests.get(url, headers=headers, params=querystring)
-    plant_data = response.json()
-    print(plant_data)
+    connect = connectDB()
+    cursor = connect.cursor(dictionary=True)
+    cursor.execute("SELECT FlowerName, FlowerBotanical, FlowerDescription, NativeRegion, FlowerHeight, imageURL FROM flowers")
+    flowers = cursor.fetchall()
+    cursor.close()
+    connect.close()
 
-    return render_template('index.html')
+    return render_template('index.html', flowers=flowers)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'GET':
+        return render_template('login.html')
+    elif request.method == 'POST':
+        email = request.form.get('Email')
+        password = request.form.get('Password')
 
-@app.route('/registration')
+        try:
+            user = auth.sign_in_with_email_and_password(email, password)
+            session['user'] = email
+
+            return redirect(url_for('index'))
+        except:
+            return render_template('login.html', message="Login Failed, Check Details!")
+
+@app.route('/registration', methods=['GET', 'POST'])
 def register():
-    return render_template('registration.html')
+    if request.method == 'GET':
+        return render_template('registration.html')
+    elif request.method == 'POST':
+        email = request.form.get('Email')
+        password = request.form.get('Password')
+
+        try:
+            auth.create_user_with_email_and_password(email, password)
+            message = "User registered successfully!"
+            color = '#70fa70'
+        except(Exception):
+            message = "Error: Failed to Register User!"
+            color = '#a81b1b'
+        
+    return render_template('registration.html', message=message, color=color)
+
+# ---------------------------------------------------------------------------------------------- #
 
 # Function Routes
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
