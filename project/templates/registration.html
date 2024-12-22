@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block titleExtension %}{% endblock %}
+
+{% block css %}<link rel="stylesheet" href="/static/CSS/login.css">{% endblock %}
+
+{% block body %}
+<div class="loginBox">
+    <h1>Sign Up to Helios</h1>
+    <form method="post">
+        <div class="txtfield">
+            <input type="text" id="Email" name="Email" required>
+            <span></span>
+            <label>Email</label>
+        </div>
+        <div class="txtfield">
+            <input type="password" id="Password" name="Password" required>
+            <span></span>
+            <label>Password</label>
+        </div>
+        <div class="pass">Forgot Password?</div>
+        <div class="form-group">
+            <ul id="PasswordPatterns" style="list-style-type: none; padding: 0px 0px 0px 10px; margin: 0;">
+              <li class="text-muted" id="length" style="color: gray;">Contains at least 8 characters</li>
+              <li class="text-muted" id="lowercase" style="color: gray;">Contains at least one lowercase letter</li>
+              <li class="text-muted" id="uppercase" style="color: gray;">Contains at least one uppercase letter</li>
+              <li class="text-muted" id="number" style="color: gray;">Contains at least one number</li>
+              <li class="text-muted" id="special" style="color: gray;">Contains at least one special character</li>
+            </ul>
+        </div>
+        <br><br>
+        <input type="submit" value="Login">
+        <br><br><br>
+    </form>
+</div>
+
+<script>
+    document.getElementById('Password').addEventListener('input', function (event) {
+        let input = event.target.value;
+    
+        if (input.length >= 8) {
+          document.getElementById('length').style.color = 'green';
+        } else {
+          document.getElementById('length').style.color = 'gray';
+        }
+    
+        if (input.match(/[a-z]/)) {
+          document.getElementById('lowercase').style.color = 'green';
+        } else {
+          document.getElementById('lowercase').style.color = 'gray';
+        }
+    
+        if (input.match(/[A-Z]/)) {
+          document.getElementById('uppercase').style.color = 'green';
+        } else {
+          document.getElementById('uppercase').style.color = 'gray';
+        }
+    
+        if (input.match(/[0-9]/)) {
+          document.getElementById('number').style.color = 'green';
+        } else {
+          document.getElementById('number').style.color = 'gray';
+        }
+    
+        if (input.match(/[!@#$%^&*]/)) {
+          document.getElementById('special').style.color = 'green';
+        } else {
+          document.getElementById('special').style.color = 'gray';
+        }
+    });
+</script>
+{% endblock %}
